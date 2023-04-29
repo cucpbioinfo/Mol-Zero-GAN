@@ -1,0 +1,17 @@
+receptor = receptors/4BTK.pdbqt
+
+center_x = 61.955
+center_y = 18.155
+center_z = 24.305
+
+size_x = 40.000
+size_y = 40.000
+size_z = 40.000
+
+seed = 1
+
+num_modes = 3
+exhaustiveness = 12
+
+
+
