@@ -16,18 +16,18 @@ To optimize based model you can run following commands of each objective functio
 
 ### QED optimization
 
-```python3 qed_optmization -iteration 50 -sample_per_iteration 3072 -singular_size 5```
+```python3 qed_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5```
 
 ### BA optimization
 
-```python3 ba_optmization -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target 4BTK```
+```python3 ba_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target 4BTK```
 
 ### Weighted Sum optimization
 
-```python3 weighted_sum_optmization -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target 4BTK -ba_optmization_log bayesian_result/ba_optimization.json```
+```python3 weighted_sum_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target 4BTK -ba_optmization_log bayesian_result/ba_optimization.json```
 
 ## Generating Compounds
 
 To generate compounds by optimized model you can run afollowing command
 
-```python3 gen_smile -model optimized_model/optimized_model -sample 1000000 -singular_size 5```
+```python3 gen_smile.py -model optimized_model/optimized_model -sample 1000000 -singular_size 5```
