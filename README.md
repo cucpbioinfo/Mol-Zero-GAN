@@ -24,10 +24,10 @@ To optimize based model you can run following commands of each objective functio
 
 ### Weighted Sum optimization
 
-```python3 weighted_sum_optmization -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1 -ba_optmization_model bayesian_result/DRD3.json```
+```python3 weighted_sum_optmization -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1 -ba_optmization_model bayesian_result/TTBK1.json```
 
 ## Generating Compounds
 
 To generate compounds by optimized model you can run following command
 
-```python3 gen_smile -model_prams bayesian_result/DRD3.json -sample 1000000 -singular_size 5```
+```python3 gen_smile -model_prams bayesian_result/TTBK1.json -sample 1000000 -singular_size 5```
