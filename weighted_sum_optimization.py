@@ -11,6 +11,7 @@ from bayes_opt import SequentialDomainReductionTransformer
 import pandas as pd
 import os
 import warnings
+from rdkit import Chem
 
 warnings.filterwarnings("ignore")
 
@@ -40,12 +41,11 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-target', help='Specify the target',default = "4BTK")
-parser.add_argument('-iteration', help='Iteration of Bayesian Optimzation',default = 50)
+parser.add_argument('-iteration', help='Iteration of Bayesian Optimzation',default = 60)
 parser.add_argument('-sample_per_iteration', help='Number of Samples per Iteration',default = 3072)
 parser.add_argument('-singular_size', help='Number of Singular Values ',default = 5)
-parser.add_argument('-output_log', help='Number of Singular Values ',default = 'bayesian_result/output_weighted_sum.json')
-parser.add_argument('-output', help='Number of Singular Values ',default = 'optimized_model/optimized_model2.pt')
-parser.add_argument('-ba_optimization_log', help='Path of ba optimization parameters result',default = 'bayesian_result/ba_optimization.json')
+parser.add_argument('-output', help='Number of Singular Values ',default = 'bayesian_result/output_weighted_sum.json')
+parser.add_argument('-ba_optimization_weights', help='Path of ba optimization parameters result',default = 'bayesian_result/output_ba_optimization.json')
 parser.add_argument('-alpha',help='alpha value',default=0.2)
 parser.add_argument('-beta',help='beta value',default=1)
 
@@ -58,11 +58,10 @@ target = args.target
 iteration = args.iteration
 sample_per_iteration = args.sample_per_iteration
 singular_size = args.singular_size
-output_log = args.output_log
 output = args.output
 alpha = args.alpha
 beta = args.beta
-ba_optimization_log = args.ba_optimization_log
+ba_optimization_weights = args.ba_optimization_weights
 print(target,iteration,sample_per_iteration,singular_size,output)
 
 
@@ -79,7 +78,7 @@ for c in model.Generator.model:
 print(utils.list_to_dict(vector))
 vector_dict = utils.list_to_dict(vector)
 
-df = pd.read_json(ba_optimization_log, lines=True)
+df = pd.read_json(ba_optimization_weights, lines=True)
 
 # convert df to list
 def df_to_list(df):
@@ -110,6 +109,13 @@ first_score = df[0]["target"]
 print("max_score", max_score)
 print("first_score", first_score)
 
+from moses.metrics.SA_Score import sascorer
+def calculateSA(smi):
+    try:
+        return sascorer.calculateScore(smi)
+    except Exception as e:
+        print(e)
+        return 10
 
 # %%
 def black_box_function(**v):
@@ -150,7 +156,7 @@ def black_box_function(**v):
 
         while True:
             print(start)
-            result += utils.runVina(start=start, stop=stop)
+            result += utils.runVina(start=start, stop=stop, target_conf=target)
             print(
                 sum(
                     [
@@ -170,7 +176,6 @@ def black_box_function(**v):
 
         # ignore empty string
 
-
     for i, layer in enumerate(layers):
         layer.weight = torch.nn.Parameter(tmp[i])
 
@@ -185,6 +190,8 @@ def black_box_function(**v):
     ba_score = -score
     ba_score = (ba_score - first_score) / (max_score - first_score)
 
+    # sort qed by result
+  
  
     utils.clear_tmp()
 
@@ -198,11 +205,7 @@ score = utils.bayesianNeural(
     vector,
     black_box_function,
     singular_size,
-    output_path=output_log,
+    output_path=output,
     n_iter=iteration,
 )
-param = score["params"]
-vec = utils.dict_to_list({int(k): param[k] for k in param})
-vec = torch.cuda.FloatTensor(vec)
-tmp = utils.replaceLayers(vec, layers, singular_size)
-torch.save(model.state_dict(), output )
+

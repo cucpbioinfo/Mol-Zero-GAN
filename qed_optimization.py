@@ -38,8 +38,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-iteration', help='Iteration of Bayesian Optimzation',default = 5)
 parser.add_argument('-sample_per_iteration', help='Number of Samples per Iteration',default = 3072)
 parser.add_argument('-singular_size', help='Number of Singular Values ',default = 5)
-parser.add_argument('-output_log', help='Number of Singular Values ',default = 'bayesian_result/output_qed.json')
-parser.add_argument('-output', help='Number of Singular Values ',default = 'optimized_model/optimized_model.pt')
+parser.add_argument('-output', help='Number of Singular Values ',default = 'bayesian_result/output_qed.json')
 
 
 
@@ -48,7 +47,6 @@ args = parser.parse_args()
 iteration = args.iteration
 sample_per_iteration = args.sample_per_iteration
 singular_size = args.singular_size
-output_log = args.output_log
 output = args.output
 singular_size = args.singular_size
 
@@ -107,12 +105,7 @@ score = utils.bayesianNeural(
     vector,
     qedOp,
     singular_size,
-    output_path=output_log,
+    output_path=output,
     n_iter=iteration,
 )
-param = score["params"]
-vec = utils.dict_to_list({int(k): param[k] for k in param})
-vec = torch.cuda.FloatTensor(vec)
-tmp = utils.replaceLayers(vec, layers, singular_size)
-torch.save(model.state_dict(), output )
 
