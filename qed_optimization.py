@@ -44,11 +44,10 @@ parser.add_argument('-output', help='Number of Singular Values ',default = 'baye
 
 args = parser.parse_args()
 
-iteration = args.iteration
-sample_per_iteration = args.sample_per_iteration
-singular_size = args.singular_size
+iteration = int(args.iteration)
+sample_per_iteration = int(args.sample_per_iteration)
 output = args.output
-singular_size = args.singular_size
+singular_size = int(args.singular_size)
 
 vector = []
 layers = []

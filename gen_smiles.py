@@ -46,8 +46,8 @@ parser.add_argument('-output', help='Number of Singular Values ',default = 'gene
 
 args = parser.parse_args()
 model_param = args.model_param
-sample = args.sample
-singular_size = args.singular_size
+sample = int(args.sample)
+singular_size = int(args.singular_size)
 output = args.output
 
 

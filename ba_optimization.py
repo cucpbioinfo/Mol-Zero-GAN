@@ -63,10 +63,10 @@ parser.add_argument('-output', help='Number of Singular Values ',default = 'baye
 args = parser.parse_args()
 
 target = args.target
-iteration = args.iteration
-sample_per_iteration = args.sample_per_iteration
-singular_size = args.singular_size
-output = args.output_log
+iteration = int(args.iteration)
+sample_per_iteration = int(args.sample_per_iteration)
+singular_size = int(args.singular_size)
+output = args.output
 print(target,iteration,sample_per_iteration,singular_size,output)
 
 # add singular value to be parameters for optmization process

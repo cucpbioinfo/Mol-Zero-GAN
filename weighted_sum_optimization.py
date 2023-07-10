@@ -55,12 +55,12 @@ parser.add_argument('-beta',help='beta value',default=1)
 args = parser.parse_args()
 
 target = args.target
-iteration = args.iteration
-sample_per_iteration = args.sample_per_iteration
-singular_size = args.singular_size
+iteration = int(args.iteration)
+sample_per_iteration = int(args.sample_per_iteration)
+singular_size = int(args.singular_size)
 output = args.output
-alpha = args.alpha
-beta = args.beta
+alpha = float(args.alpha)
+beta = float(args.beta)
 ba_optimization_weights = args.ba_optimization_weights
 print(target,iteration,sample_per_iteration,singular_size,output)
 
