@@ -24,7 +24,6 @@ from moses.models_storage import ModelsStorage
 
 import os
 import pandas as pd
-e
 from rdkit import Chem
 
 def calculateSA(smi):
