@@ -30,4 +30,4 @@ To optimize based model you can run following commands of each objective functio
 
 To generate compounds by optimized model you can run following command
 
-```python3 gen_smiles.py -model_prams bayesian_result/TTBK1.json -sample 1000000 -singular_size 5```
+```python3 gen_smiles.py -model_pram bayesian_result/TTBK1.json -sample 1000000 -singular_size 5```
