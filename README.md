@@ -16,7 +16,7 @@ To optimize based model you can run following commands of each objective functio
 
 ### QED optimization
 
-```python3 qed_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5```
+```python3 qed_optimization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5```
 
 ### BA optimization
 
