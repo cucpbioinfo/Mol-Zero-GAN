@@ -20,11 +20,11 @@ To optimize based model you can run following commands of each objective functio
 
 ### BA optimization
 
-```python3 ba_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1```
+```python3 ba_optimization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1```
 
 ### Weighted Sum optimization
 
-```python3 weighted_sum_optmization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1 -ba_optmization_model bayesian_result/TTBK1.json```
+```python3 weighted_sum_optimization.py -iteration 50 -sample_per_iteration 3072 -singular_size 5 -target TTBK1 -ba_optmization_model bayesian_result/TTBK1.json```
 
 ## Generating Compounds
 
